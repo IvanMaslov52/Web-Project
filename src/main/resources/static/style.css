@@ -1,0 +1,134 @@
+.container1{
+  padding-top: 10px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.img
+{
+  margin: 5px;
+  width: 380px; height: 214px; object-fit: cover
+}
+
+header
+{
+  border-bottom: orange solid 5px;
+}
+.but1
+{
+  border-color: #DDDDDD;
+  border-radius: 25px;
+  height: 32px;
+  width: 32px;
+  position:relative;left: -32px ;
+}
+#inp1{
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 1rem;
+  padding: 8px 12px;
+  border-radius: 25px;
+  outline: none;
+  transition: all 0.30s ease-in-out;
+  border: 1px solid #DDDDDD;
+}
+#inp1:focus {
+  box-shadow: 0 0 5px orange;
+  border: 1px solid orange;
+}
+.search-con{
+  width: 350px;
+  align-items: center;
+  display: flex;
+  position:relative;
+}
+
+.htext{
+  font-family: 'Roboto', sans-serif ;
+  font-weight: bold;
+  font-size: 46px;
+}
+
+main{
+  width: 1280px;
+  margin: auto;
+}
+.con{
+  width: 1280px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+.reset
+{
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  z-index: 2;
+  cursor: pointer;
+  right :160px;
+  display: none;
+}
+.reset_on{
+  display: block;
+}
+.reset::before,
+.reset::after{
+  content: "";
+  display: block;
+  position: absolute;
+  width: 20px;
+  height: 3px;
+  background-color: #1c1c1c;
+  transform: rotate(45deg);
+  border-radius: 2px;
+  top: 35%;
+}
+.reset::before{
+  transform: rotate(-45deg);
+}
+/* Dropdown Button */
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
