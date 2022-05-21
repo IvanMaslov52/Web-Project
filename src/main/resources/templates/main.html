@@ -16,6 +16,12 @@
         <div class="dropdown-content">
             <a href="/Profile">Profile</a>
             <a href="/Add">Add check</a>
+            <div th:if="${user.isAdmin()} == true">
+                <a th:href="@{/Request}">Request</a>
+            </div>
+            <div th:if="${user.isAdmin()} == false">
+                <a th:href="@{/Notification}">Notifications</a>
+            </div>
             <form th:method="post" th:action="@{/logout}">
                 <button type="submit">Logout</button>
             </form>

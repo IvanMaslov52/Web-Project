@@ -16,7 +16,7 @@ public class ProfileController {
     @Autowired
     private UserRepo userRepo;
     @GetMapping(StringConstant.SLPROFILE)
-    public String main(@AuthenticationPrincipal User user, Model model)
+    public String show(@AuthenticationPrincipal User user, Model model)
     {
         model.addAttribute("username",user.getUsername());
         return StringConstant.PROFILE;

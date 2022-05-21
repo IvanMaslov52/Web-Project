@@ -3,13 +3,16 @@ package com.example.webproject.Controllers;
 import com.example.webproject.Component.JobScheduleCreator;
 import com.example.webproject.Constants.Bank;
 import com.example.webproject.Constants.StringConstant;
-import com.example.webproject.Jobs.CreateJob;
+import com.example.webproject.Jobs.TimeOutJob;
 import com.example.webproject.domain.Bill;
 
+import com.example.webproject.domain.BillRequest;
 import com.example.webproject.domain.Request;
 import com.example.webproject.domain.User;
 import com.example.webproject.repos.BillRepo;
 
+import com.example.webproject.repos.BillRequestRepo;
+import com.example.webproject.repos.RequestRepo;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +38,10 @@ import java.util.UUID;
 public class AddController {
     @Autowired
     private BillRepo accountRepo;
+   @Autowired
+   private RequestRepo requestRepo;
+    @Autowired
+    private BillRequestRepo billRequestRepo;
     @Autowired
     private JobScheduleCreator jobScheduleCreator;
     @Autowired
@@ -43,7 +50,7 @@ public class AddController {
     private ApplicationContext context;
 
     @GetMapping(StringConstant.SLADD)
-    public String Add(Model model)
+    public String show(Model model)
     {
         model.addAttribute("Bank", Bank.TakeList());
         model.addAttribute("Account" , new Bill());
@@ -55,24 +62,10 @@ public class AddController {
         if(bindingResult.hasErrors())
             return StringConstant.SLADD;
         billControl(user,account);
-
-        LocalDateTime  local  = LocalDateTime.now().plusSeconds(5);
-        Instant instant = local.atZone(ZoneId.systemDefault()).toInstant();
-        scheduler.start();
-        scheduler.scheduleJob(jobScheduleCreator.createJob(CreateJob.class, true, context, UUID.randomUUID().toString(), "Creator"),jobScheduleCreator.createSimpleTrigger(UUID.randomUUID().toString(),"Creation",Date.from(instant) ));
-
         return StringConstant.REDMAIN;
     }
 
-
-
-
-
-
-
-
-    private void billControl(User user, Bill account)
-    {
+    private void billControl(User user, Bill account) throws SchedulerException {
         List<Bill> list = (List<Bill>) accountRepo.findAll();
         int i = 0;
         for(Bill el : list)
@@ -85,8 +78,15 @@ public class AddController {
             accountRepo.save(account);
         }
         else {
-            Request request = new Request();
-            request.setMessage("User " +  user.getUsername() + " want to make check : " + account.toString());
+            BillRequest billRequest =new BillRequest(account.getBank(),account.getFio(),account.getUser(),account.getMoney());
+            BillRequest billRequest1 = billRequestRepo.save(billRequest);
+           Request request =  requestRepo.save(new Request(account.getUser().getUsername(),"In progress",LocalDateTime.now(),billRequest1));
+
+            LocalDateTime local  = LocalDateTime.now().plusSeconds(60);
+            Instant instant = local.atZone(ZoneId.systemDefault()).toInstant();
+            scheduler.start();
+            scheduler.scheduleJob(jobScheduleCreator.createJob(TimeOutJob.class, true, context, String.valueOf(requestRepo.save(request).getId()), "TimeOut"),jobScheduleCreator.createSimpleTrigger(UUID.randomUUID().toString(),"Creation", Date.from(instant) ));
+
         }
     }
 

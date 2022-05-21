@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <meta charset="UTF-8">
+  <title>Hello World!</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet " href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+<body>
+<div th:if="${request.getBillRequest()!=null}">
+  <form th:action="@{/RequestChange/{id}(id = ${request.getId()})}" th:method="post">
+    <select name="bank" id="bank">
+      <option th:value="${request.getBillRequest().getBank()}" th:text="${request.getBillRequest().getBank()}"></option>
+      <option th:each="name : ${Bank}"
+              th:value="${name}"
+              th:text="${name}"></option>
+    </select>
+    <input type="number"  name="money" th:value="${request.getBillRequest().getMoney()}">
+    <input type="text"  name="fio" th:value="${request.getBillRequest().getFio()}">
+    <input type="text"  name="username" th:value="${request.getUser_username()}">
+    <select name="status" id="status">
+      <option th:value="${request.getStatus()}" th:text="${request.getStatus()}"></option>
+      <option th:each="name : ${State}"
+              th:value="${name}"
+              th:text="${name}"></option>
+    </select>
+    <button type="submit">Сохранить</button>
+  </form>
+</div>
+
+
+
+<div th:if="${request.getCardRequest()!=null}">
+  <form th:action="@{/RequestChange/{id}(id = ${request.getId()})}" th:method="delete">
+    <input type="number" name="number" th:value="${request.getCardRequest().getNumber()}">
+    <input type="number"  name="CVV" th:value="${request.getCardRequest().getCVV()}">
+    <input type="text"  name="time" th:value="${request.getCardRequest().getTime()}">
+    <input type="number" name="billid" th:value="${request.getCardRequest().getBill().getId()}">
+    <select name="status" id="status">
+      <option th:value="${request.getStatus()}" th:text="${request.getStatus()}"></option>
+      <option th:each="name : ${State}"
+              th:value="${name}"
+              th:text="${name}"></option>
+    </select>
+    <button type="submit">Сохранить</button>
+  </form>
+</div>
+
+<a th:href="@{/Request}">Назад</a>
+</body>
+</html>

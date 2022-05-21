@@ -1,5 +1,8 @@
 package com.example.webproject.Constants;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StringConstant {
     public static final String MAIN = "main";
     public static final String SLMAIN = "/main";
@@ -34,6 +37,42 @@ public class StringConstant {
     public static final String SLINVALIDSESSION = "/InvalidSession";
     public static final String SLINVALIDHISTORY = "/InvalidHistory";
     public static final String INVALIDHISTORY = "InvalidHistory";
+    public static final String SLREQUEST = "/Request";
+    public static final String REQUEST = "Request";
+    public static final String REDREQUEST = "redirect:/Request";
+    public static final String SLREQUESTADD_ID = "/RequestAdd/{id}";
+    public static final String SLREQUESTADD = "/RequestAdd";
+    public static final String REQUESTADD = "RequestAdd";
+    public static final String MESSAGE_ID = "Message/{id}";
+    public static final String SLMESSAGE_ID = "/Message/{id}";
+    public static final String MESSAGE = "Message";
+    public static final String SLMESSAGE = "/Message";
+    public static final String SLNOTIFICATION = "/Notification";
+    public static final String NOTIFICATION = "Notification";
+    public static final String REDNOTIFICATION = "redirect:/Notification";
+    public static final String SLREQUESTCHANGE_ID= "/RequestChange/{id}";
+    public static final String REQUESTCHANGED= "RequestChange";
+    public static final String SLREQUESTCHANGE= "/RequestChange";
+
+    public static final String SLNOTIFICATIONANSWER_ID = "/NotificationAnswer/{id}";
+    public static final String SLNOTIFICATIONANSWER = "/NotificationAnswer";
+    public static final String NOTIFICATIONANSWER = "NotificationAnswer";
+
+
+
+
+    public static List<String> statuslist()
+    {
+        List<String> list = new ArrayList<>();
+        list.add("Сreated");
+        list.add("Agreed");
+        list.add("In progress");
+        list.add("Denied");
+        list.add("TimeOut");
+        return list;
+    }
+
+
 
 
 

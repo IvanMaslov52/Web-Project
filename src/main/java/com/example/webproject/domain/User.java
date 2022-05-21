@@ -95,4 +95,12 @@ public class User implements UserDetails {
     public Set<Role> getRoles() {
         return roles;
     }
+    public boolean isAdmin()
+    {
+       return this.getRoles().contains(Role.ADMIN);
+    }
+    public boolean isUser()
+    {
+        return this.getRoles().contains(Role.USER);
+    }
 }

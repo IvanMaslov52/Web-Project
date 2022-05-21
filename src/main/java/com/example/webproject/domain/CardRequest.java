@@ -3,7 +3,8 @@ package com.example.webproject.domain;
 import javax.persistence.*;
 
 @Entity
-public class Card {
+public class CardRequest
+{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -19,10 +20,7 @@ public class Card {
     @JoinColumn(name = "bill_id")
     private Bill bill;
 
-    public Card() {
-    }
-
-    public Card(String number, String fio, String CVV, String time, Bill bill) {
+    public CardRequest(String number, String fio, String CVV, String time, Bill bill) {
         this.number = number;
         this.fio = fio;
         this.CVV = CVV;
@@ -30,8 +28,8 @@ public class Card {
         this.bill = bill;
     }
 
-    public Bill getBill() {
-        return bill;
+    public CardRequest() {
+
     }
 
     public Long getId() {
@@ -46,8 +44,8 @@ public class Card {
         return number;
     }
 
-    public void setNumber(String bank) {
-        this.number = bank;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public String getFio() {
@@ -66,10 +64,6 @@ public class Card {
         this.CVV = CVV;
     }
 
-    public void setBill(Bill bill) {
-        this.bill = bill;
-    }
-
     public String getTime() {
         return time;
     }
@@ -77,5 +71,24 @@ public class Card {
     public void setTime(String time) {
         this.time = time;
     }
-}
 
+    public Bill getBill() {
+        return bill;
+    }
+
+    public void setBill(Bill bill) {
+        this.bill = bill;
+    }
+
+    @Override
+    public String toString() {
+        return "CardRequest{" +
+                "id=" + id +
+                ", number='" + number + '\'' +
+                ", fio='" + fio + '\'' +
+                ", CVV='" + CVV + '\'' +
+                ", time='" + time + '\'' +
+                ", bill=" + bill +
+                '}';
+    }
+}

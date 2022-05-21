@@ -18,7 +18,7 @@ public class CardViewController {
     @Autowired
     private CardRepo cardrepo;
     @GetMapping(StringConstant.SLCARDVIEW_ID)
-    public String view(@PathVariable("id")Long id, Model model)
+    public String show(@PathVariable("id")Long id, Model model)
     {
         Bill bill = billRepo.findAccountsById(id);
         Iterable<Card> cards = cardrepo.findAllByBill(bill);

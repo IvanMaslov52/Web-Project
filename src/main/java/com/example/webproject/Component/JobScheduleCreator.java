@@ -5,7 +5,6 @@ import org.quartz.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
 import org.springframework.scheduling.quartz.JobDetailFactoryBean;
-import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.scheduling.quartz.SimpleTriggerFactoryBean;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +16,6 @@ import java.util.Date;
 @Component
 public class JobScheduleCreator {
 
-
     public JobDetail createJob(Class<? extends Job> jobClass, boolean isDurable,
                                ApplicationContext context, String jobName, String jobGroup) {
         JobDetailFactoryBean factoryBean = new JobDetailFactoryBean();
@@ -26,7 +24,6 @@ public class JobScheduleCreator {
         factoryBean.setApplicationContext(context);
         factoryBean.setName(jobName);
         factoryBean.setGroup(jobGroup);
-
 
         JobDataMap jobDataMap = new JobDataMap();
         jobDataMap.put(jobName + jobGroup, jobClass.getName());
